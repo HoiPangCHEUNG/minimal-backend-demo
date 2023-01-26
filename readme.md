@@ -1,4 +1,4 @@
-# Minimal backend for fetching dummy data
+# Minimal NodeJS backend with inversifyJS for fetching dummy data
 
 ## What it does ?
 
