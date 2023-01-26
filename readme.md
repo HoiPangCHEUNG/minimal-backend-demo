@@ -1,5 +1,7 @@
 # Minimal NodeJS backend with inversifyJS for fetching dummy data
 
+A simple project written in `Typescript` demonstrates how you could use `inversifyJS` in NodeJS for better management of dependency injection.
+
 ## What it does ?
 
 It fetches dummy data from `https://jsonplaceholder.typicode.com/todos`.
