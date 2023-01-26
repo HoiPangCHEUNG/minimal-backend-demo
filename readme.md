@@ -30,11 +30,21 @@ You should have it runned in `localhost:3000`
 
 ## Basic Use
 
+You can start fetching the data with `PostMan`(preferred) or simply enter the link in a browser
+
 ```
 http://localhost:3000/todos
 ```
 
 ## With Options
+
+- id
+- userId
+- filterByCompleted
+- pageSize
+- pageToken
+
+when `id` option is used, `pageSize` and `pageToken` option will be ignored.
 
 ```
 http://localhost:3000/todos?id=100
