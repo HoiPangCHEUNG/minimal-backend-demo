@@ -18,11 +18,11 @@ export default class ApiManager implements Manager {
     if (params.id) {
       updatedParams['id'] = params.id;
     } else {
-      updatedParams['userId'] = params.userId;
       updatedParams['pageSize'] = params.pageSize;
       updatedParams['pageToken'] = params.pageToken;
     }
 
+    updatedParams['userId'] = params.userId;
     updatedParams['filterByCompleted'] = params.filterByCompleted;
 
     return this.toDoClient.fetchData(updatedParams);
