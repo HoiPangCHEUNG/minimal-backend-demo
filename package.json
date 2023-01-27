@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "watch:api": "node dist/cmd/api/index",
-    "start:api": "tsc-watch --build --noClear --onSuccess 'npm run watch:api'"
+    "start:api": "tsc-watch --noClear --onSuccess 'npm run watch:api'"
   },
   "keywords": [],
   "author": "HoiPang",
