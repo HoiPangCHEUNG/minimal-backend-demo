@@ -35,3 +35,12 @@ export const resultWithPostId = [
     userId: 3,
   },
 ];
+
+export const resultWithAllOptions = [
+  {
+    completed: false,
+    id: 100,
+    title: 'excepturi a et neque qui expedita vel voluptate',
+    userId: 5,
+  },
+];
