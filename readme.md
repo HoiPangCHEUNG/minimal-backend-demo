@@ -54,6 +54,12 @@ http://localhost:3000/todos?pageToken=10
 http://localhost:3000/todos?pageSize=15
 ```
 
+## Test
+
+```
+npm run test
+```
+
 ## To-do / Possible Enhancement
 
 - Rate limit

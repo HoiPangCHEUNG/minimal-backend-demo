@@ -17,7 +17,7 @@ describe('ToDoClient', () => {
 
   const toDoClient = new ToDoClient(appConfig);
 
-  test('Fetch todo Data with postId', async () => {
+  test('Fetch Data with postId', async () => {
     expect(
       await toDoClient.fetchData({
         id: 50,
@@ -25,7 +25,7 @@ describe('ToDoClient', () => {
     ).toStrictEqual(resultWithPostId);
   });
 
-  test('Fetch todo Data with pageToken, pageSize, and filterByCompleted', async () => {
+  test('Fetch Data with pageToken, pageSize, and filterByCompleted', async () => {
     expect(
       await toDoClient.fetchData({
         pageSize: 2,
@@ -35,19 +35,19 @@ describe('ToDoClient', () => {
     ).toStrictEqual(resultWithPageAndCompleteOptions);
   });
 
-  test('Fetch todo Data with pageToken and pageSize', async () => {
+  test('Fetch Data with pageToken and pageSize', async () => {
     expect(
       await toDoClient.fetchData({ pageSize: 3, pageToken: 10 }),
     ).toStrictEqual(resultWithPageOptions);
   });
 
-  test('Fetch todo Data with pageSize only', async () => {
+  test('Fetch Data with pageSize only', async () => {
     expect(await toDoClient.fetchData({ pageSize: 1 })).toStrictEqual(
       resultWithPageSize,
     );
   });
 
-  test('Fetch todo Data ', async () => {
+  test('Fetch Data ', async () => {
     expect(await toDoClient.fetchData({})).toHaveLength(200);
   });
 });
