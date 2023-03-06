@@ -1,6 +1,6 @@
-// import e from 'express';
 import { inject, injectable } from 'inversify';
 
+import { defaultPageSize, maxPageSize } from '../constants/pageOptions';
 import { TYPES } from '../constants/types';
 import { Manager } from '../interfaces/toDo';
 import { GetToDosRequest, GetToDosResponse } from '../models/toDo';
@@ -13,18 +13,25 @@ export default class ApiManager implements Manager {
   ) {}
 
   public async fetchData(params: GetToDosRequest): Promise<GetToDosResponse> {
-    const updatedParams: GetToDosRequest = {};
+    const processedParams: GetToDosRequest = {};
 
+    // if id is used, ignore pageOptions
     if (params.id) {
-      updatedParams['id'] = params.id;
+      processedParams['id'] = params.id;
     } else {
-      updatedParams['pageSize'] = params.pageSize;
-      updatedParams['pageToken'] = params.pageToken;
+      processedParams['pageSize'] = this.getPageSize(params.pageSize);
+      processedParams['pageToken'] = params.pageToken;
     }
 
-    updatedParams['userId'] = params.userId;
-    updatedParams['filterByCompleted'] = params.filterByCompleted;
+    processedParams['userId'] = params.userId;
+    processedParams['filterByCompleted'] = params.filterByCompleted;
 
-    return this.toDoClient.fetchData(updatedParams);
+    return this.toDoClient.fetchData(processedParams);
+  }
+
+  private getPageSize(pageSize?: number): number {
+    return !pageSize || pageSize <= 0 || pageSize > maxPageSize
+      ? defaultPageSize
+      : pageSize;
   }
 }

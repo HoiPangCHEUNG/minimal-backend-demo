@@ -1,14 +1,15 @@
 import { Container } from 'inversify';
 
 import { appConfig } from '../config';
+import { defaultPageSize, maxPageSize } from '../constants/pageOptions';
 import { TYPES } from '../constants/types';
-import { AppConfig } from '../interfaces/config';
 import {
   resultWithAllOptions,
   resultWithPageAndCompleteOptions,
   resultWithPageOptions,
   resultWithPageSize,
 } from '../mock/toDo';
+import { AppConfig } from '../models/config';
 import ToDoClient from '../services/toDo';
 import ApiManager from './toDo';
 
@@ -36,7 +37,7 @@ describe('ApiManger', () => {
     container.unbindAll();
   });
 
-  it('Call the ToDoClient and fetch data with postId (all page params will be ignored)', async () => {
+  it('Call the ToDoClient and fetch data with id (all page params will be ignored)', async () => {
     const apiManager = container.get<ApiManager>(TYPES.ApiManager);
     expect(
       await apiManager.fetchData({
@@ -60,6 +61,33 @@ describe('ApiManger', () => {
     ).toStrictEqual(resultWithPageAndCompleteOptions);
   });
 
+  it('Call the ToDoClient and fetch data with very large pageSize', async () => {
+    const apiManager = container.get<ApiManager>(TYPES.ApiManager);
+    expect(
+      await apiManager.fetchData({
+        pageSize: 300,
+      }),
+    ).toHaveLength(defaultPageSize);
+  });
+
+  it('Call the ToDoClient and fetch data with negative pageSize', async () => {
+    const apiManager = container.get<ApiManager>(TYPES.ApiManager);
+    expect(
+      await apiManager.fetchData({
+        pageSize: -10,
+      }),
+    ).toHaveLength(defaultPageSize);
+  });
+
+  it('Call the ToDoClient and fetch data with maxPageSize', async () => {
+    const apiManager = container.get<ApiManager>(TYPES.ApiManager);
+    expect(
+      await apiManager.fetchData({
+        pageSize: maxPageSize,
+      }),
+    ).toHaveLength(maxPageSize);
+  });
+
   it('Call the ToDoClient and fetch data with pageToken and pageSize', async () => {
     const apiManager = container.get<ApiManager>(TYPES.ApiManager);
     expect(
@@ -76,6 +104,6 @@ describe('ApiManger', () => {
 
   it('Call the ToDoClient and fetch data', async () => {
     const apiManager = container.get<ApiManager>(TYPES.ApiManager);
-    expect(await apiManager.fetchData({})).toHaveLength(200);
+    expect(await apiManager.fetchData({})).toHaveLength(defaultPageSize);
   });
 });

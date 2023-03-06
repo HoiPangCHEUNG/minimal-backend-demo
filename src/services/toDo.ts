@@ -2,8 +2,8 @@ import axios from 'axios';
 import { inject, injectable } from 'inversify';
 
 import { TYPES } from '../constants/types';
-import { AppConfig } from '../interfaces/config';
 import { Service } from '../interfaces/toDo';
+import { AppConfig } from '../models/config';
 import { GetToDosRequest, GetToDosResponse } from '../models/toDo';
 
 @injectable()
@@ -24,6 +24,10 @@ export default class ToDoClient implements Service {
           },
         },
       );
+
+      if (response.status !== 200) {
+        throw new Error(`${response.status} : ${response.statusText}`);
+      }
 
       return response.data;
     } catch (e) {
