@@ -1,4 +1,4 @@
-import { AppConfig } from '../interfaces/config';
+import { AppConfig } from '../models/config';
 
 const getProcessEnv = (envName: string, defaultVal: string): string => {
   const env = process.env[envName];

@@ -7,6 +7,7 @@ import {
   queryParam,
 } from 'inversify-express-utils';
 
+import { defaultPageSize, maxPageSize } from '../constants/pageOptions';
 import { TYPES } from '../constants/types';
 import ApiManager from '../managers/toDo';
 
@@ -21,7 +22,10 @@ export class ToDoController extends BaseHttpController {
         id: Joi.number().integer(),
         userId: Joi.number().integer(),
         filterByCompleted: Joi.boolean(),
-        pageSize: Joi.number().integer().default(200).max(200),
+        pageSize: Joi.number()
+          .integer()
+          .default(defaultPageSize)
+          .max(maxPageSize),
         pageToken: Joi.number().integer(),
       }),
     }),

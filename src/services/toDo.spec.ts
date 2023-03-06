@@ -1,5 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
 
+import { maxPageSize } from '../constants/pageOptions';
 import {
   resultWithPageAndCompleteOptions,
   resultWithPageOptions,
@@ -17,7 +18,7 @@ describe('ToDoClient', () => {
 
   const toDoClient = new ToDoClient(appConfig);
 
-  test('Fetch Data with postId', async () => {
+  test('Fetch Data with id', async () => {
     expect(
       await toDoClient.fetchData({
         id: 50,
@@ -48,6 +49,6 @@ describe('ToDoClient', () => {
   });
 
   test('Fetch Data ', async () => {
-    expect(await toDoClient.fetchData({})).toHaveLength(200);
+    expect(await toDoClient.fetchData({})).toHaveLength(maxPageSize);
   });
 });

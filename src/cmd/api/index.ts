@@ -5,8 +5,8 @@ import 'reflect-metadata';
 import { appConfig } from '../../config';
 import { TYPES } from '../../constants/types';
 import '../../controllers/toDo';
-import { AppConfig } from '../../interfaces/config';
 import ApiManager from '../../managers/toDo';
+import { AppConfig } from '../../models/config';
 import Server from '../../server';
 import ToDoClient from '../../services/toDo';
 
